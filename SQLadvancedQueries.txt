@@ -1,0 +1,24 @@
+1) How many employees with eacth title born after 1965
+
+SELECT d.dept_name as "Department", count(e.emp_no) as "Number of Employees" from departments d
+INNER JOIN dept_emp de on de.dept_no = d.dept_no
+INNER JOIN employees e on e.emp_no = de.emp_no
+WHERE e.birth_date < '1965-01-01'
+GROUP BY d.dept_name;
+
+
+
+2) Avg salary by title
+
+SELECT d.dept_name as "Department", avg(s.salary) as "Average Salary" from departments d
+INNER JOIN dept_emp de on de.dept_no = d.dept_no
+INNER JOIN salaries s on s.emp_no = de.emp_no
+GROUP BY d.dept_name;
+
+
+3) How much was spent on salary for marketing dept from 1990 to 1992?
+
+select d.dept_name as "Department", sum(s.salary) as "Sum of Salaries, 1990-92" from departments d
+INNER JOIN dept_emp de on de.dept_no = d.dept_no
+INNER JOIN salaries s on s.emp_no = de.emp_no
+WHERE s.from_date > '1990-01-1' AND s.from_date < '1992-01-01' AND d.dept_name = 'Marketing';
